@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: postgres:latest
+    container_name: spring-todo-db
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: spring-todo
+
+  adminer:
+    image: adminer
+    container_name: spring-todo-adminer
+    restart: always
+    ports:
+      - "2080:8080"
