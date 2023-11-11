@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -11,11 +12,11 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="users")
-
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq")
+    @GenericGenerator(name = "seq", strategy = "increment")
     private Long id;
     private String username;
     private String password;

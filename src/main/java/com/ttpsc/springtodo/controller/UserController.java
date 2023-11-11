@@ -6,7 +6,9 @@ import com.ttpsc.springtodo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,9 +26,14 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public String createUser(Model model) {
-        model.addAttribute("user", new UserDTO());
-        return "user/create";
+    public String createUser(@ModelAttribute("user") UserDTO userDTO,
+                            BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "user/create";
+        }
+
+        userService.addNewUser(userDTO);
+        return "redirect:/homepage";
     }
 
     @GetMapping("/user/{id}")

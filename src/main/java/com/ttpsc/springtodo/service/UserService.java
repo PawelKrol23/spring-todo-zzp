@@ -1,5 +1,6 @@
 package com.ttpsc.springtodo.service;
 
+import com.ttpsc.springtodo.model.UserDTO;
 import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,13 @@ public class UserService {
 
     public UserEntity getUser(Long id) {
         return userRepository.findById(id).orElseThrow();
+    }
+
+    public void addNewUser(UserDTO userDTO) {
+        UserEntity newUser = new UserEntity();
+        newUser.setUsername(userDTO.getUsername());
+        newUser.setPassword(userDTO.getPassword());
+        newUser.setRole("user");
+        userRepository.save(newUser);
     }
 }
