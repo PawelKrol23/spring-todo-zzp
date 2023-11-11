@@ -1,6 +1,6 @@
 package com.ttpsc.springtodo.controller;
 
-import com.ttpsc.springtodo.model.User;
+import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,13 +16,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user")
-    public String getAllUsers(Model model) {
-        model.addAttribute("user", new User());
+    public String createUser(Model model) {
+        model.addAttribute("user", new UserEntity());
         return "user/create";
     }
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable Long id) {
+    public UserEntity getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 

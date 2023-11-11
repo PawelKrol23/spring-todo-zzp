@@ -19,7 +19,7 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name="owner", nullable=false)
-    private User owner;
+    private UserEntity owner;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;

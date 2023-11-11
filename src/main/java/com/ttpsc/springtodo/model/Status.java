@@ -17,5 +17,5 @@ public class Status {
 
     @ManyToOne
     @JoinColumn(name="owner", nullable=false)
-    private User owner;
+    private UserEntity owner;
 }

@@ -1,6 +1,6 @@
 package com.ttpsc.springtodo.service;
 
-import com.ttpsc.springtodo.model.User;
+import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public List<User> getUsers (){
+    public List<UserEntity> getUsers (){
         return userRepository.findAll();
     }
 
-    public User getUser(Long id) {
+    public UserEntity getUser(Long id) {
         return userRepository.findById(id).orElseThrow();
     }
 }
