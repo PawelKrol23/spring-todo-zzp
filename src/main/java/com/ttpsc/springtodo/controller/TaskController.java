@@ -1,8 +1,6 @@
-package com.ttpsc.springtodo.controler;
+package com.ttpsc.springtodo.controller;
 
-import com.ttpsc.springtodo.model.Category;
 import com.ttpsc.springtodo.model.Task;
-import com.ttpsc.springtodo.service.CategoryService;
 import com.ttpsc.springtodo.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

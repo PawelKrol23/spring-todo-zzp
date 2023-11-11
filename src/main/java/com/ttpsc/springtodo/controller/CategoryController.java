@@ -1,4 +1,4 @@
-package com.ttpsc.springtodo.controler;
+package com.ttpsc.springtodo.controller;
 
 import com.ttpsc.springtodo.model.Category;
 import com.ttpsc.springtodo.service.CategoryService;

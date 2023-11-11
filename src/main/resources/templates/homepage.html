@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:id="http://www.w3.org/1999/xhtml">
+<head>
+  <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+  <title>Homepage</title>
+  <link rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <link type="text/css" href="static/styles.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">To-Do App</a>
+  </div>
+</nav>
+
+<div class="container mt-5" style="background-color: whitesmoke">
+  <div class="row">
+    <div class="col-12">
+      <h1 th:align="center">Welcome to Your To-Do App</h1>
+      <p th:align="center">This is a simple To-Do application to help you manage your daily tasks.</p>
+
+      <button type="button" class="btn btn-info" style="text-align: center">See your tasks</button>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
