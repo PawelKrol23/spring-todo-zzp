@@ -6,9 +6,51 @@
   <title>Users list</title>
 </head>
 <body>
+<div th:replace="~{commons :: navbar}"></div>
 
-<div th:insert="~{commons :: navbar}"></div>
+<section class="py-4">
+  <div class="container-lg">
 
+    <!-- lead text -->
+    <div class="text-center mb-5">
+      <h2>Create new user</h2>
+      <p class="lead text-muted">Fulfill form to create new user</p>
+    </div>
+
+    <!-- form -->
+    <div class="row justify-content-center my-5">
+      <div class="col-lg-6">
+        <form th:object="${user}" method="post" th:action="@{/user}">
+
+          <!-- username -->
+          <div class="mb-2">
+            <label for="firstName" class="form-label">Username:</label>
+            <div class="input-group" th:classappend="${#fields.hasErrors('username') ? 'has-validation' : ''}">
+              <input type="text" aria-describedby="validationFirstName" class="form-control" id="firstName" placeholder="e.g. William" th:field="*{username}" th:classappend="${#fields.hasErrors('username') ? 'is-invalid' : ''}" required>
+              <div id="validationFirstName" class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="mb-2">
+            <label for="lastName" class="form-label">Password:</label>
+            <div class="input-group" th:classappend="${#fields.hasErrors('password') ? 'has-validation' : ''}">
+              <input type="password" aria-describedby="validationLastName" class="form-control" id="lastName" placeholder="e.g. strongPassword123" th:field="*{password}" th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}" required>
+              <div id="validationLastName" class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+          </div>
+
+          <!-- submit button -->
+          <div class="mb-4 text-center">
+            <button type="submit" class="btn btn-primary">Add new user</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
 <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>
