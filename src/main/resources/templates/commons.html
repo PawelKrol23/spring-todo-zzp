@@ -36,8 +36,11 @@
         <li class="nav-item">
           <a sec:authorize-url="/category" th:href="@{/category}" class="nav-link">Categories</a>
         </li>
+        <li class="nav-item d-md-none">
+          <a sec:authorize-url="/logout" th:href="@{/logout}" class="nav-link">Logout</a>
+        </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav d-none d-md-block">
         <li class="nav-item">
           <a sec:authorize-url="/logout" th:href="@{/logout}" class="nav-link">Logout</a>
         </li>
