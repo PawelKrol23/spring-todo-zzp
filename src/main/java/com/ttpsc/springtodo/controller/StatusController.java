@@ -28,6 +28,11 @@ public class StatusController {
         UserEntity loggedUser = userService.getUserByName(authentication.getName());
         List <Status> loggedUsersStatuses = statusService.getStatuses(loggedUser.getId());
         model.addAttribute("statuses",loggedUsersStatuses);
+        return "listStatus";
+    }
+
+    @GetMapping("/status/add")
+    public String listStatus(){
         return "addStatus";
     }
 

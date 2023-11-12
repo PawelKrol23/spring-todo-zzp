@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
     <link rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
@@ -10,7 +10,9 @@
 
 <div class="container mt-4">
     <h1 class="text-center">List of Your Tasks</h1>
-    <a th:href="@{/addTasks}" class="btn btn-primary my-3" role="button">Add new Task +</a>
+    <div class="d-flex justify-content-center mb-2">
+    <a th:href="@{/addTasks}" class="btn btn-primary my-3" role="button">+ Add new Task +</a>
+    </div>
     <div class="row">
         <div class="col-md-4" th:each="task : ${tasks}">
             <div class="card mb-4 shadow-sm">
@@ -18,7 +20,7 @@
                     <h5 class="my-0 font-weight-normal" th:text="${task.summary}">Task Title</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text" th:text="${task.description}">Description...</p>
+                    <p class="card-text" th:text="${task.description}">Description...</p><hr>
                     <div class="row mb-2">
                         <div class="col-6">
                             <small class="text-muted" th:text="'Start: ' + ${task.startDate}">Start: Date</small>

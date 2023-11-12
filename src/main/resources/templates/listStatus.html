@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+  <link rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <title>Statuses</title>
+</head>
+<body>
+<div th:insert="~{commons :: navbar}"></div>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Your Current List of Statuses</h2>
+  <div class="d-flex justify-content-center mb-2">
+    <a th:href="@{/status/add}" class="btn btn-primary">
+      Add New Status +
+    </a>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Status Name</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="status, statusStat : ${statuses}">
+      <th scope="row" th:text="${statusStat.count}">Status count</th>
+      <td th:text="${status.name}">Status Name</td>
+      <td>
+        <a th:href="@{/status/delete/{id}(id=${status.id})}" class="btn btn-sm btn-outline-danger">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
