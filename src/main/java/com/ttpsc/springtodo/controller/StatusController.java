@@ -1,12 +1,16 @@
 package com.ttpsc.springtodo.controller;
 
 import com.ttpsc.springtodo.model.Status;
+import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.service.StatusService;
+import com.ttpsc.springtodo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,20 +20,16 @@ import java.util.List;
 public class StatusController {
 
 private final StatusService statusService;
-
-    @GetMapping("/status/{id}")
-    public Status getStatus(@PathVariable Long id) {
-        return statusService.getStatus(id);
-    }
+private final UserService userService;
 
     @GetMapping("/status")
-    public String addStatusView(){
+    public String addStatusView(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity loggedUser = userService.getUserByName(authentication.getName());
+        List <Status> loggedUsersStatuses = statusService.getStatuses(loggedUser.getId());
+        model.addAttribute("statuses",loggedUsersStatuses);
         return "addStatus";
     }
 
-    @GetMapping("/user/{id}/status")
-    public List<Status> getUsersStatuses(@PathVariable Long id) {
-        return statusService.getStatuses(id);
-    }
 
 }
