@@ -3,6 +3,7 @@ package com.ttpsc.springtodo.controller;
 import com.ttpsc.springtodo.model.Task;
 import com.ttpsc.springtodo.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class TaskController {
 
@@ -22,8 +23,13 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public String showAllTasks() {
+        return "tasks";
+    }
+
+    @GetMapping("/addTasks")
+    public String AddTaskView(){
+        return "addTasks";
     }
 
     @GetMapping("/tasks/{id}")

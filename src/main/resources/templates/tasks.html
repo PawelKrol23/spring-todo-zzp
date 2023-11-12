@@ -6,15 +6,11 @@
     <title>task</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">To-Do App</a>
-    </div>
-</nav>
+<div th:insert="~{commons :: navbar}">  </div>
 
 <div class="container" style="background-color: whitesmoke">
-    <h1 class="h1 mt-5" style="text-align: center">Your list of tasks</h1>
-    <button type="button" class="btn btn-primary">Add Task</button>
+    <h1 class="h1 my-4" style="text-align: center">Your list of tasks</h1>
+    <a th:href="@{/addTasks}" class="btn btn-primary" role="button">Add Task</a>
     <table class="table table-hover table-dark mt-2">
         <thead>
         <tr>
@@ -25,6 +21,8 @@
             <th scope="col">End date</th>
             <th scope="col">Category</th>
             <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+
         </tr>
         </thead>
         <tbody>
@@ -36,7 +34,9 @@
             <td>End date1</td>
             <td>Category1</td>
             <td>Status1</td>
-
+            <td>
+                <button type="submit">Edit</button>
+            </td>
         </tr>
         <tr>
             <th scope="row">2</th>
@@ -46,6 +46,9 @@
             <td>End date2</td>
             <td>Category2</td>
             <td>Status2</td>
+            <td>
+                <button type="submit">Edit</button>
+            </td>
         </tr>
         <tr>
             <th scope="row">3</th>
@@ -55,6 +58,9 @@
             <td>End date3</td>
             <td>Category3</td>
             <td>Status3</td>
+            <td>
+                <button type="submit">Edit</button>
+            </td>
         </tr>
         </tbody>
     </table>

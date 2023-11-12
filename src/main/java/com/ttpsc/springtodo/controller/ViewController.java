@@ -11,8 +11,4 @@ public class ViewController {
         return "homepage";
     }
 
-    @GetMapping("/task")
-    public String TaskView(){
-        return "task";
-    }
 }
