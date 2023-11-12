@@ -33,7 +33,7 @@ public class UserController {
         }
 
         userService.addNewUser(userDTO);
-        return "redirect:/homepage";
+        return "redirect:/";
     }
 
     @GetMapping("/user/{id}")

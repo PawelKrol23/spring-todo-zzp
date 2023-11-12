@@ -18,6 +18,8 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq")
     @GenericGenerator(name = "seq", strategy = "increment")
     private Long id;
+
+    @Column(unique = true)
     private String username;
     private String password;
     private String role;
