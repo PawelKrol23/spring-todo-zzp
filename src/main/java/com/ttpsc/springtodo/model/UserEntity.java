@@ -28,7 +28,4 @@ public class UserEntity {
     @OneToMany(mappedBy = "owner")
     private List<Status> statuses;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "owner")
-    private List<Task> tasks;
 }

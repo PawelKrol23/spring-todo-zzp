@@ -27,8 +27,4 @@ public class Task {
     @ManyToOne
     @JoinColumn(name="category", nullable=false)
     private Category taskCategory;
-
-    @ManyToOne
-    @JoinColumn(name="status", nullable=false)
-    private Status status;
 }

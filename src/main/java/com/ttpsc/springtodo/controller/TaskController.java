@@ -1,12 +1,8 @@
 package com.ttpsc.springtodo.controller;
 
 import com.ttpsc.springtodo.model.Task;
-import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.service.TaskService;
-import com.ttpsc.springtodo.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +18,10 @@ import java.util.List;
 public class TaskController {
 
     private final TaskService taskService;
-    private final UserService userService;
 
-    @GetMapping("/tasks")
-    public String getUsersTasks(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity loggedUser = userService.getUserByName(authentication.getName());
-        List <Task> usersTasks = loggedUser.getTasks();
-        model.addAttribute("tasks", usersTasks);
-        return "tasks";
+    @GetMapping("/user/{id}/tasks")
+    public List<Task> getUsersTasks(@PathVariable Long id) {
+        return taskService.getTasks(id);
     }
 
 
@@ -44,10 +35,11 @@ public class TaskController {
         return "addTasks";
     }
 
+    @GetMapping("/tasks")
     public String listTasks(Model model) {
-        List<Task> tasks = taskService.getAllTasks();
+        List<Task> tasks = taskService.getAllTasks(); // Get tasks from your service or repository
         model.addAttribute("tasks", tasks);
-        return "tasks";
+        return "tasks"; // The name of your Thymeleaf template
     }
 
     @GetMapping("/tasks/{id}")

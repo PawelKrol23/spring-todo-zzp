@@ -19,12 +19,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserEntity getUserById(Long id) {
+    public UserEntity getUser(Long id) {
         return userRepository.findById(id).orElseThrow();
-    }
-
-    public UserEntity getUserByName(String name) {
-        return userRepository.findByUsername(name).orElseThrow();
     }
 
     public void addNewUser(UserDTO userDTO) {
