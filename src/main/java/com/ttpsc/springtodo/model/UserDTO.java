@@ -1,5 +1,6 @@
 package com.ttpsc.springtodo.model;
 
+import com.ttpsc.springtodo.validators.UsernameValidation;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+
+    @UsernameValidation
     @Size(min = 5, max = 20)
     private String username;
 

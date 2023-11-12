@@ -3,6 +3,7 @@ package com.ttpsc.springtodo.controller;
 import com.ttpsc.springtodo.model.UserDTO;
 import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public String createUser(@ModelAttribute("user") UserDTO userDTO,
+    public String createUser(@Valid @ModelAttribute("user") UserDTO userDTO,
                             BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "user/create";
