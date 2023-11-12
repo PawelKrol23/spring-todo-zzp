@@ -3,6 +3,7 @@ package com.ttpsc.springtodo.controller;
 import com.ttpsc.springtodo.model.Category;
 import com.ttpsc.springtodo.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
 
     @GetMapping("/category")
-    public List<Category> getAllCategories() {
-        return categoryService.getCategories();
+    public String addCategoryView() {
+        return "addCategory";
     }
 
     @GetMapping("/category/{id}")

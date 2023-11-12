@@ -1,70 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" xmlns:id="http://www.w3.org/1999/xhtml">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
     <link rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <title>task</title>
+    <title>Tasks</title>
 </head>
 <body>
-<div th:insert="~{commons :: navbar}">  </div>
+<div th:insert="~{commons :: navbar}"></div>
 
-<div class="container" style="background-color: whitesmoke">
-    <h1 class="h1 my-4" style="text-align: center">Your list of tasks</h1>
-    <a th:href="@{/addTasks}" class="btn btn-primary" role="button">Add Task</a>
-    <table class="table table-hover table-dark mt-2">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Start date</th>
-            <th scope="col">End date</th>
-            <th scope="col">Category</th>
-            <th scope="col">Status</th>
-            <th scope="col">Edit</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Title1</td>
-            <td>Description1</td>
-            <td>Start date1</td>
-            <td>End date1</td>
-            <td>Category1</td>
-            <td>Status1</td>
-            <td>
-                <button type="submit">Edit</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Title2</td>
-            <td>Description2</td>
-            <td>Start date2</td>
-            <td>End date2</td>
-            <td>Category2</td>
-            <td>Status2</td>
-            <td>
-                <button type="submit">Edit</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Title3</td>
-            <td>Description3</td>
-            <td>Start date3</td>
-            <td>End date3</td>
-            <td>Category3</td>
-            <td>Status3</td>
-            <td>
-                <button type="submit">Edit</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container mt-4">
+    <h1 class="text-center">List of Your Tasks</h1>
+    <a th:href="@{/addTasks}" class="btn btn-primary my-3" role="button">Add new Task +</a>
+    <div class="row">
+        <div class="col-md-4" th:each="task : ${tasks}">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h5 class="my-0 font-weight-normal" th:text="${task.id}">Task Title</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="${task.description}">Description...</p>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <small class="text-muted" th:text="'Start: ' + ${task.startDate}">Start: Date</small>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted" th:text="'Due: ' + ${task.endDate}">Due: Date</small>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <small class="text-muted" th:text="'Category: ' + ${task.taskCategory}">Category: Type</small>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted" th:text="'Status: ' + ${task.summary}">Status: State</small>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center mt-3">
+                        <a th:href="@{/editTasks}" class="btn btn-sm btn-outline-secondary me-2 " role="button">Edit</a>
+                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>
 </body>
 </html>
