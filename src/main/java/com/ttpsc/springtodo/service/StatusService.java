@@ -25,8 +25,9 @@ public class StatusService {
         return statusRepository.findById(id).orElseThrow();
     }
 
-    public Status getStatusByName(String name) {
-       return statusRepository.getStatusByName(name);
+    public Status getStatusByName(String name,Long userId) {
+
+       return statusRepository.getStatusByName(name,userId);
     }
 
     public void addStatusForUser(Status status, String username) {

@@ -13,6 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     @Query("SELECT c FROM categories c WHERE c.owner.id = :userId")
     List<Category> getUsersCategories(Long userId);
 
-    @Query("SELECT c FROM categories c WHERE c.name = :name")
-    Category getCategoriesByName(String name);
+    @Query("SELECT c FROM categories c WHERE c.name = :name AND c.owner.id=:userId")
+    Category getCategoriesByName(String name,Long userId);
 }

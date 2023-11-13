@@ -30,6 +30,19 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    public void updateTask(Long id,Task task) {
+        Task pulled = taskRepository.findById(id).orElseThrow();
+
+        pulled.setSummary(task.getSummary());
+        pulled.setDescription(task.getDescription());
+        pulled.setStartDate(task.getStartDate());
+        pulled.setEndDate(task.getEndDate());
+        pulled.setTaskCategory(task.getTaskCategory());
+        pulled.setStatus(task.getStatus());
+
+        taskRepository.save(pulled);
+    }
+
     public void delete(Task task) {
         taskRepository.delete(task);
     }

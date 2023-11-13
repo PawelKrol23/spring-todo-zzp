@@ -25,40 +25,49 @@
 </style>
 
 <div class="container">
-  <h2 class="text-center my-3">Edit TODO task</h2>
+  <h2 class="text-center my-3">Edit task</h2>
   <div class="justify-content-center">
-    <form method="post">
+    <form method="post" th:object="${dto}" th:action="@{|/task/edit/${task.id}|}"lass="w-50">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input placeholder="e.g. Java Project" type="text" class="form-control form-control-sm" id="title" required>
+        <div class="input-group" th:classappend="${#fields.hasErrors('summary') ? 'has-validation' : ''}">
+          <input placeholder="e.g. Java Project" name="summary" type="text" aria-describedby="validationName" class="form-control form-control-sm" id="title"
+                 th:value="${task.summary}" th:classappend="${#fields.hasErrors('summary') ? 'is-invalid' : ''}" required>
+        </div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea placeholder="Short description..." class="form-control form-control-sm" id="description" required></textarea>
+        <textarea placeholder="Short description..." type="text" name="description" aria-describedby="validationName" class="form-control form-control-sm" id="description"
+                  th:text="${task.description}" th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}" required></textarea>
       </div>
       <div class="row">
         <div class="mb-3 col-md-6">
           <label for="startDate" class="form-label">Start Date</label>
-          <input type="datetime-local" class="form-control form-control-sm" id="startDate" required>
+          <input type="datetime-local" class="form-control form-control-sm" name="startDate" id="startDate" th:value="${startDate.toString()}"  required>
         </div>
         <div class="mb-3 col-md-6">
           <label for="endDate" class="form-label">End Date</label>
-          <input type="datetime-local" class="form-control form-control-sm" id="endDate" required>
+          <input type="datetime-local" class="form-control form-control-sm" name="endDate" id="endDate" th:value="${endDate.toString()}" required>
         </div>
       </div>
       <div class="row">
         <div class="mb-3 col-md-6">
           <label for="category" class="form-label">Category</label>
-          <select class="form-select form-select-sm" id="category" required>
-            <option value="">Choose...</option>
+          <select name="categoryName" class="form-select form-select-sm" id="category" required>
+            <option th:each="category: ${categories}"
+                    th:value="${category.getName()}"
+                    th:selected="(${category.name.toLowerCase()} == ${task.taskCategory.name.toLowerCase()})"
+                    th:text="${category.getName()}"/></option>
 
           </select>
         </div>
         <div class="mb-3 col-md-6">
           <label for="status" class="form-label">Status</label>
-          <select class="form-select form-select-sm" id="status" required>
-            <option value="">Choose...</option>
-
+          <select name="statusName" class="form-select form-select-sm" id="status" required>
+            <option th:each="status: ${statuses}"
+                    th:value="${status.getName()}"
+                    th:selected="(${status.name.toLowerCase()} == ${task.status.name.toLowerCase()})"
+                    th:text="${status.getName()}"/></option>
           </select>
         </div>
       </div>

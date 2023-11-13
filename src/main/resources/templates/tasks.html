@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center mt-3">
-                        <a th:href="@{/editTasks}" class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
+                        <a th:href="@{|/task/edit/${task.id}|} "class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
                         <form method="post" th:action="@{|/task/delete/${task.id}|} "lass="w-50">
                             <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>

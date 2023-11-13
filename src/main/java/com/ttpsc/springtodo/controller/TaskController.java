@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -39,10 +38,6 @@ public class TaskController {
         return "tasks";
     }
 
-    @GetMapping("/editTasks")
-    public String editTaskView(){
-        return "editTasks";
-    }
 
     @GetMapping("/task/add")
     public String addTaskForm(Model model){
@@ -63,14 +58,18 @@ public class TaskController {
     @PostMapping("/task/add")
     public String addTask(@Valid @ModelAttribute ("task") TaskDTO dto,
                           BindingResult bindingResult) {
+        System.out.println(dto.getStartDate());
+        System.out.println(dto.getEndDate());
         if(bindingResult.hasErrors()) {
             return "redirect:/task/add";
         }
-        Category category = categoryService.getCategoryByName(dto.getCategoryName());
-        Status status = statusService.getStatusByName(dto.getStatusName());
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity loggedUser = userService.getUserByName(authentication.getName());
+
+        Category category = categoryService.getCategoryByName(dto.getCategoryName(), loggedUser.getId());
+        Status status = statusService.getStatusByName(dto.getStatusName(), loggedUser.getId());
+
 
         Task task = new Task();
         task.setOwner(userService.getUserById(loggedUser.getId()));
@@ -81,6 +80,53 @@ public class TaskController {
         task.setTaskCategory(category);
         task.setStatus(status);
         taskService.save(task);
+
+
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/task/edit/{id}")
+    public String editTaskForm(Model model,@PathVariable Long id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity loggedUser = userService.getUserByName(authentication.getName());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        Task task = taskService.getTask(id);
+        String startDate = task.getStartDate().format(formatter);
+        String endDate = task.getEndDate().format(formatter);
+
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("categories",categoryService.getCategories(loggedUser.getId()));
+        model.addAttribute("statuses",statusService.getStatuses(loggedUser.getId()));
+        model.addAttribute("task",task);
+        model.addAttribute("dto",new TaskDTO());
+        return "editTasks";
+    }
+
+    @PostMapping("/task/edit/{id}")
+    public String editTask(TaskDTO dto, @PathVariable Long id,
+                           BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            return "redirect:/task/edit/"+id;
+        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity loggedUser = userService.getUserByName(authentication.getName());
+
+        Category category = categoryService.getCategoryByName(dto.getCategoryName(),loggedUser.getId());
+        Status status = statusService.getStatusByName(dto.getStatusName(), loggedUser.getId());
+        LocalDateTime startDate = LocalDateTime.parse(dto.getStartDate());
+        LocalDateTime endDate = LocalDateTime.parse(dto.getEndDate());
+
+        Task task = new Task();
+        task.setSummary(dto.getSummary());
+        task.setDescription(dto.getDescription());
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
+        task.setTaskCategory(category);
+        task.setStatus(status);
+
+        taskService.updateTask(id,task);
 
         return "redirect:/tasks";
     }
