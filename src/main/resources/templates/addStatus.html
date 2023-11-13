@@ -14,14 +14,31 @@
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <h2 class="mb-5 text-center">Add New Status</h2>
-      <form>
-        <div class="mb-3">
-          <label for="categoryName" class="form-label">Status Name</label>
-          <input type="text" class="form-control" id="categoryName" placeholder="Enter status name" required>
+      <form th:object="${status}" method="post" th:action="@{/status/add}">
+
+        <!-- name -->
+        <div class="mb-2">
+          <label for="name" class="form-label">Name:</label>
+          <div class="input-group" th:classappend="${#fields.hasErrors('name') ? 'has-validation' : ''}">
+            <input type="text" aria-describedby="validationName" class="form-control" id="name"  th:field="*{name}" th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}" required>
+            <div id="validationName" class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+          </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary mt-4">Add Status</button>
+
+        <!-- displayName -->
+        <div class="mb-2">
+          <label for="displayName" class="form-label">Display name:</label>
+          <div class="input-group" th:classappend="${#fields.hasErrors('displayname') ? 'has-validation' : ''}">
+            <input type="text" aria-describedby="validationDisplayName" class="form-control" id="displayName"  th:field="*{displayname}" th:classappend="${#fields.hasErrors('displayname') ? 'is-invalid' : ''}" required>
+            <div id="validationDisplayName" class="invalid-feedback" th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></div>
+          </div>
         </div>
+
+        <!-- submit button -->
+        <div class="mb-4 text-center">
+          <button type="submit" class="btn btn-primary">Add new status</button>
+        </div>
+
       </form>
     </div>
   </div>

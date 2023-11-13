@@ -4,13 +4,17 @@ import com.ttpsc.springtodo.model.Status;
 import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.service.StatusService;
 import com.ttpsc.springtodo.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -32,9 +36,20 @@ public class StatusController {
     }
 
     @GetMapping("/status/add")
-    public String listStatus(){
+    public String statusCreationForm(Model model){
+        model.addAttribute("status", new Status());
         return "addStatus";
     }
 
+    @PostMapping("/status/add")
+    public String statusCreationSubmit(@Valid @ModelAttribute("status") Status status,
+                                       BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "addStatus";
+        }
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        statusService.addStatusForUser(status, username);
+        return "redirect:/status";
+    }
 }
