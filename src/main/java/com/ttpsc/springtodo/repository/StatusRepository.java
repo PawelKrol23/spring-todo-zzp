@@ -12,4 +12,8 @@ public interface StatusRepository extends JpaRepository<Status,Long> {
 
    @Query("SELECT s FROM statuses s WHERE s.owner.id = :userId")
    List<Status> getUsersStatuses(Long userId);
+
+
+   @Query("SELECT s FROM statuses s WHERE s.name = :name")
+   Status getStatusByName(String name);
 }

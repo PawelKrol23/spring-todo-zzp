@@ -3,6 +3,9 @@ package com.ttpsc.springtodo.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -11,7 +14,8 @@ import java.time.LocalDateTime;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq")
+    @GenericGenerator(name = "seq", strategy = "increment")
     private Long id;
 
     private String summary;

@@ -25,6 +25,10 @@ public class StatusService {
         return statusRepository.findById(id).orElseThrow();
     }
 
+    public Status getStatusByName(String name) {
+       return statusRepository.getStatusByName(name);
+    }
+
     public void addStatusForUser(Status status, String username) {
         status.setId(null);
 

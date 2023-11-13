@@ -11,7 +11,7 @@
 <div class="container mt-4">
     <h1 class="text-center">List of Your Tasks</h1>
     <div class="d-flex justify-content-center mb-2">
-    <a th:href="@{/addTasks}" class="btn btn-primary my-3" role="button">+ Add new Task +</a>
+    <a th:href="@{/task/add}" class="btn btn-primary my-3" role="button">+ Add new Task +</a>
     </div>
     <div class="row">
         <div class="col-md-4" th:each="task : ${tasks}">

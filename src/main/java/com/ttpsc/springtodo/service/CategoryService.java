@@ -21,4 +21,8 @@ public class CategoryService {
     public Category getCategory(Long id) {
         return categoryRepository.findById(id).orElseThrow();
     }
+
+    public Category getCategoryByName(String name) {
+        return categoryRepository.getCategoriesByName(name);
+    }
 }

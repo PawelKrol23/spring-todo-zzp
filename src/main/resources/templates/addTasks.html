@@ -12,38 +12,45 @@
 <div class="container">
   <h2 class="text-center mt-5">Add TODO task</h2>
   <div class="d-flex justify-content-center vh-100">
-    <form method="post" class="w-50">
+    <form method="post" th:object="${task}" th:action="@{/task/add}"lass="w-50">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input placeholder="e.g. Java Project" type="text" class="form-control form-control-sm" id="title" required>
+        <div class="input-group" th:classappend="${#fields.hasErrors('summary') ? 'has-validation' : ''}">
+        <input placeholder="e.g. Java Project" type="text" aria-describedby="validationName" class="form-control form-control-sm" id="title"
+            th:field="*{summary}" th:classappend="${#fields.hasErrors('summary') ? 'is-invalid' : ''}" required>
+        </div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea placeholder="Short description..." class="form-control form-control-sm" id="description" required></textarea>
+        <textarea placeholder="Short description..." type="text" aria-describedby="validationName" class="form-control form-control-sm" id="description"
+               th:field="*{description}" th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}" required></textarea>
       </div>
       <div class="row">
         <div class="mb-3 col-md-6">
           <label for="startDate" class="form-label">Start Date</label>
-          <input type="datetime-local" class="form-control form-control-sm" id="startDate" required>
+          <input type="datetime-local" class="form-control form-control-sm" id="startDate"   th:field="*{startDate}" required>
         </div>
         <div class="mb-3 col-md-6">
           <label for="endDate" class="form-label">End Date</label>
-          <input type="datetime-local" class="form-control form-control-sm" id="endDate" required>
+          <input type="datetime-local" class="form-control form-control-sm" id="endDate"   th:field="*{endDate}" required>
         </div>
       </div>
       <div class="row">
         <div class="mb-3 col-md-6">
           <label for="category" class="form-label">Category</label>
-          <select class="form-select form-select-sm" id="category" required>
-            <option value="">Choose...</option>
+          <select th:field="*{categoryName}" class="form-select form-select-sm" id="category" required>
+            <option th:each="category: ${categories}"
+                    th:value="${category.getName()}"
+                    th:text="${category.getName()}"/></option>
 
           </select>
         </div>
         <div class="mb-3 col-md-6">
           <label for="status" class="form-label">Status</label>
-          <select class="form-select form-select-sm" id="status" required>
-            <option value="">Choose...</option>
-
+          <select th:field="*{statusName}" class="form-select form-select-sm" id="status" required>
+            <option th:each="status: ${statuses}"
+                    th:value="${status.getName()}"
+                    th:text="${status.getName()}"/></option>
           </select>
         </div>
       </div>
