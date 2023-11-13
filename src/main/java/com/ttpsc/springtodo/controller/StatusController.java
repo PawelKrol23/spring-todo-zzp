@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -32,20 +31,20 @@ public class StatusController {
         UserEntity loggedUser = userService.getUserByName(authentication.getName());
         List <Status> loggedUsersStatuses = statusService.getStatuses(loggedUser.getId());
         model.addAttribute("statuses",loggedUsersStatuses);
-        return "listStatus";
+        return "status/list";
     }
 
     @GetMapping("/status/add")
     public String statusCreationForm(Model model){
         model.addAttribute("status", new Status());
-        return "addStatus";
+        return "status/add";
     }
 
     @PostMapping("/status/add")
     public String statusCreationSubmit(@Valid @ModelAttribute("status") Status status,
                                        BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "addStatus";
+            return "status/add";
         }
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
