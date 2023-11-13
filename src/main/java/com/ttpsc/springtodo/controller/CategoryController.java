@@ -25,14 +25,19 @@ public class CategoryController {
     private final UserService userService;
 
     @GetMapping("/category")
-    public String addCategoryView(Model model) {
+    public String CategoryListView(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity loggedUser = userService.getUserByName(authentication.getName());
         List <Category> loggedUsersCategories = categoryService.getCategories(loggedUser.getId());
         model.addAttribute("categories",loggedUsersCategories);
-        return "addCategory";
+        return "listCategory";
     }
 
+    @GetMapping("/category/add")
+    public String addCategoryView()
+    {
+        return "addCategory";
+    }
     @GetMapping("/category/{id}")
     public Category getCategory(@PathVariable Long id) {
         return categoryService.getCategory(id);

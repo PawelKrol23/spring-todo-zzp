@@ -3,7 +3,7 @@
 <head>
   <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
   <link rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-  <title>Statuses</title>
+  <title>Categories</title>
 </head>
 <body>
 <div th:insert="~{commons :: navbar}"></div>
@@ -21,11 +21,11 @@
 </style>
 
 <div class="container mt-4">
-  <h2 class="text-center mb-4">Your Current List of Statuses</h2>
+  <h2 class="text-center mb-4">Your Current List of Categories</h2>
   <div class="row">
     <div class="col-lg-8 mx-auto">
       <div class="d-flex justify-content-center mb-2">
-        <a th:href="@{/status/add}" class="btn btn-primary">Add New Status +</a>
+        <a th:href="@{/category/add}" class="btn btn-primary my-2">Add New Category +</a>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -37,11 +37,11 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="status, statusStat : ${statuses}">
-            <th scope="row" th:text="${statusStat.count}">Status id</th>
-            <td th:text="${status.name}">Status Name</td>
+          <tr th:each="category, categoryStat : ${categories}">
+            <th scope="row" th:text="${categoryStat.count}">Category id</th>
+            <td th:text="${category.name}">Status Name</td>
             <td>
-              <a th:href="@{|/status/${status.id}|}" class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
+              <a th:href="@{|/category/${category.id}|}" class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
               <a class="btn btn-sm btn-outline-danger">Delete</a>
             </td>
           </tr>

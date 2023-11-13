@@ -4,21 +4,93 @@
   <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
   <link rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
   <link type="text/css" href="static/styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
   <title>Homepage</title>
+  <style>
+    .bg-light-container {
+      background: linear-gradient(to bottom right, #e6ecef, #f8f9fa);
+      box-shadow: 0 5px 6px -6px #999;
+      padding: 20px;
+      border-radius: 15px;    }
+    body {
+      font-family: 'Roboto', Sans-serif;
+    }
+  </style>
 </head>
 <body>
 <div th:insert="~{commons :: navbar}">  </div>
 
-<div class="container">
-  <div class="jumbotron mt-5" style="background-color: whitesmoke">
-    <h1 class="display-4">Hello!</h1>
-    <p class="lead">Welcome to Your To-Do App</p>
-    <hr class="my-4">
-    <p>This is a simple To-Do application to help you manage your daily tasks.</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg my-4" th:href="@{/tasks}" role="button">My tasks</a>
-    </p>
-  </div>
+<div class="container my-5 bg-light-container p-3">
+
+  <header class="text-center my-5">
+    <h1>Welcome to Your TODO Application</h1>
+  </header>
+
+  <section class="row justify-content-center mb-5">
+    <div class="col-12 col-md-8">
+      <div class="card p-4 shadow">
+        <h2 class="text-center">List of Your Tasks</h2>
+        <p class="text-center">Keep track of what you have to do.</p>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-primary btn-lg" th:href="@{/tasks}">View Tasks</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-center mb-5">
+    <h2>Other Features</h2>
+  </section>
+
+  <section id="features" class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+
+    <div class="col">
+      <div class="card h-100 p-3 shadow">
+        <h3>List of Your Categories</h3>
+        <p>Organize your tasks by categories.</p>
+        <a class="btn btn-secondary">View Categories</a>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 p-3 shadow">
+        <h3>List of Your Statuses</h3>
+        <p>Check the progress of your tasks.</p>
+        <a class="btn btn-success" th:href="@{status}">View Statuses</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-center mb-5">
+    <p>Or... you can add your own!</p>
+  </section>
+
+  <section class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100 p-3 shadow">
+        <h3>Add a New Task</h3>
+        <p>Create your own To-Do tasks.</p>
+        <a class="btn btn-info" th:href="@{/task/add}">Add Task</a>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 p-3 shadow">
+        <h3>Add a New Category</h3>
+        <p>Start a new category for your tasks.</p>
+        <a class="btn btn-warning" th:href="@{/category}">Add Category</a>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 p-3 shadow">
+        <h3>Add a New Status</h3>
+        <p>Define a new status for tracking.</p>
+        <a class="btn btn-dark" th:href="@{/status/add}">Add Status</a>
+      </div>
+    </div>
+  </section>
 </div>
 
 <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>

@@ -8,10 +8,19 @@
 <body>
 <div th:insert="~{commons :: navbar}"></div>
 
+<style>
+    .container {
+        background: linear-gradient(to bottom right, #e6ecef, #f8f9fa);
+        box-shadow: 0 5px 6px -6px #999;
+        padding: 20px;
+        border-radius: 15px;
+    }
+</style>
+
 <div class="container mt-4">
     <h1 class="text-center">List of Your Tasks</h1>
     <div class="d-flex justify-content-center mb-2">
-    <a th:href="@{/task/add}" class="btn btn-primary my-3" role="button">+ Add new Task +</a>
+        <a th:href="@{/task/add}" class="btn btn-primary my-3" role="button">Add new Task +</a>
     </div>
     <div class="row">
         <div class="col-md-4" th:each="task : ${tasks}">
@@ -19,7 +28,7 @@
                 <div class="card-header">
                     <h5 class="my-0 font-weight-normal" th:text="${task.summary}">Task Title</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body shadow">
                     <p class="card-text" th:text="${task.description}">Description...</p><hr>
                     <div class="row mb-2">
                         <div class="col-6">
@@ -40,7 +49,7 @@
                     <div class="d-flex justify-content-center align-items-center mt-3">
                         <a th:href="@{/editTasks}" class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
                         <form method="post" th:action="@{|/task/delete/${task.id}|} "lass="w-50">
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
                     </div>
                 </div>
