@@ -33,4 +33,13 @@ public class StatusService {
 
         statusRepository.save(status);
     }
+
+    public void updateStatus(Long id, Status status) {
+        Status statusFromDB = statusRepository.findById(id).orElseThrow();
+
+        statusFromDB.setName(status.getName());
+        statusFromDB.setDisplayname(status.getDisplayname());
+
+        statusRepository.save(statusFromDB);
+    }
 }

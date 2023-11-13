@@ -11,10 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,5 +55,17 @@ public class StatusController {
                                  @PathVariable Long id){
         model.addAttribute("status", statusService.getStatus(id));
         return "status/edit";
+    }
+
+    @PutMapping("/status/{id}")
+    public String statusEditSubmit(@Valid @ModelAttribute("status") Status status,
+                                   @PathVariable Long id,
+                                   BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "status/add";
+        }
+
+        statusService.updateStatus(id, status);
+        return "redirect:/status";
     }
 }
