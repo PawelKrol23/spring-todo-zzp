@@ -9,10 +9,25 @@
 <body>
 <div th:insert="~{commons :: navbar}">  </div>
 
+<style>
+  .container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    padding: 20px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
 <div class="container">
-  <h2 class="text-center mt-5">Edit TODO task</h2>
-  <div class="d-flex justify-content-center vh-100">
-    <form method="post" class="w-50">
+  <h2 class="text-center my-3">Edit TODO task</h2>
+  <div class="justify-content-center">
+    <form method="post">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input placeholder="e.g. Java Project" type="text" class="form-control form-control-sm" id="title" required>

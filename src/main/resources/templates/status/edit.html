@@ -18,12 +18,15 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
 
 <div class="container my-4">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-12">
       <h2 class="mb-5 text-center">Edit Status</h2>
       <form th:object="${status}" th:method="PUT" th:action="@{|/status/${status.id}|}">
 
@@ -47,7 +50,7 @@
 
         <!-- submit button -->
         <div class="mb-4 text-center">
-          <button type="submit" class="btn btn-primary">Update status</button>
+          <button type="submit" class="btn btn-primary mt-3">Update status</button>
         </div>
 
       </form>
