@@ -14,8 +14,8 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
 
-    public List<Category> getCategories(){
-        return categoryRepository.findAll();
+    public List<Category> getCategories(Long userId){
+        return categoryRepository.getUsersCategories(userId);
     }
 
     public Category getCategory(Long id) {

@@ -1,9 +1,6 @@
 package com.ttpsc.springtodo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +14,9 @@ public class Category {
     private Long id;
     public String name;
     public String description;
+
+
+    @ManyToOne
+    @JoinColumn(name="owner", nullable=false)
+    private UserEntity owner;
 }
