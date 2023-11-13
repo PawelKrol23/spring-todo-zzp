@@ -57,6 +57,6 @@ public class StatusController {
     public String statusEditForm(Model model,
                                  @PathVariable Long id){
         model.addAttribute("status", statusService.getStatus(id));
-        return "status/add";
+        return "status/edit";
     }
 }
