@@ -33,7 +33,8 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Status Name</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
           </thead>
           <tbody>
@@ -42,7 +43,11 @@
             <td th:text="${status.name}">Status Name</td>
             <td>
               <a th:href="@{|/status/${status.id}|}" class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
-              <a class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+            <td>
+              <form method="post" th:action="@{|/status/delete/${status.id}|}">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
             </td>
           </tr>
           </tbody>

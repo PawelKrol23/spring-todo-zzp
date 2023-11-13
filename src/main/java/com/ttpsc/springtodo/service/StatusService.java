@@ -25,9 +25,8 @@ public class StatusService {
         return statusRepository.findById(id).orElseThrow();
     }
 
-    public Status getStatusByName(String name,Long userId) {
-
-       return statusRepository.getStatusByName(name,userId);
+    public Status getStatusByName(String name, Long userId) {
+        return statusRepository.getStatusByName(name, userId);
     }
 
     public void addStatusForUser(Status status, String username) {
@@ -47,4 +46,8 @@ public class StatusService {
 
         statusRepository.save(statusFromDB);
     }
+    public void deleteStatus(Status status){
+        statusRepository.delete(status);
+    }
+
 }

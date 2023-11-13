@@ -33,12 +33,13 @@
         <div class="input-group" th:classappend="${#fields.hasErrors('summary') ? 'has-validation' : ''}">
         <input placeholder="e.g. Java Project" type="text" aria-describedby="validationName" class="form-control form-control-sm" id="title"
             th:field="*{summary}" th:classappend="${#fields.hasErrors('summary') ? 'is-invalid' : ''}" required>
+          <div id="validationName" class="invalid-feedback" th:if="${#fields.hasErrors('summary')}" th:errors="*{summary}"></div>
         </div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea placeholder="Short description..." type="text" aria-describedby="validationName" class="form-control form-control-sm" id="description"
-               th:field="*{description}" th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}" required></textarea>
+               th:field="*{description}" required></textarea>
       </div>
       <div class="row">
         <div class="mb-3 col-md-6">

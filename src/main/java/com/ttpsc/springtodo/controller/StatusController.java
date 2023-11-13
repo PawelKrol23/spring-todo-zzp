@@ -1,5 +1,6 @@
 package com.ttpsc.springtodo.controller;
 
+import com.ttpsc.springtodo.model.Category;
 import com.ttpsc.springtodo.model.Status;
 import com.ttpsc.springtodo.model.UserEntity;
 import com.ttpsc.springtodo.service.StatusService;
@@ -24,7 +25,7 @@ public class StatusController {
     private final UserService userService;
 
     @GetMapping("/status")
-    public String addStatusView(Model model){
+    public String listStatusView(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity loggedUser = userService.getUserByName(authentication.getName());
         List <Status> loggedUsersStatuses = statusService.getStatuses(loggedUser.getId());
@@ -66,6 +67,13 @@ public class StatusController {
         }
 
         statusService.updateStatus(id, status);
+        return "redirect:/status";
+    }
+
+    @PostMapping("/status/delete/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        Status status = statusService.getStatus(id);
+        statusService.deleteStatus(status);
         return "redirect:/status";
     }
 }

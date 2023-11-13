@@ -32,17 +32,24 @@
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Status Name</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="category, categoryStat : ${categories}">
             <th scope="row" th:text="${categoryStat.count}">Category id</th>
-            <td th:text="${category.name}">Status Name</td>
+            <td th:text="${category.name}">Category Name</td>
+            <td th:text="${category.description}">Description</td>
             <td>
               <a th:href="@{|/category/${category.id}|}" class="btn btn-sm btn-outline-info me-2 " role="button">Edit</a>
-              <a class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+            <td>
+              <form method="post" th:action="@{|/category/delete/${category.id}|}">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
             </td>
           </tr>
           </tbody>
