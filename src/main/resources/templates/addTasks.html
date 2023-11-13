@@ -25,7 +25,7 @@
 
 </style>
 <div class="container">
-  <h2 class="text-center my-3">Add TODO task</h2>
+  <h2 class="text-center my-3">Add new task</h2>
   <div class="justify-content-center">
     <form method="post" th:object="${task}" th:action="@{/task/add}"lass="w-50">
       <div class="mb-3">
@@ -43,11 +43,11 @@
       <div class="row">
         <div class="mb-3 col-md-6">
           <label for="startDate" class="form-label">Start Date</label>
-          <input type="datetime-local" class="form-control form-control-sm" id="startDate"   th:field="*{startDate}" required>
+          <input type="datetime-local" class="form-control form-control-sm" name="startDate" id="startDate" th:value="${startDate.toString()}"  required>
         </div>
         <div class="mb-3 col-md-6">
           <label for="endDate" class="form-label">End Date</label>
-          <input type="datetime-local" class="form-control form-control-sm" id="endDate"   th:field="*{endDate}" required>
+          <input type="datetime-local" class="form-control form-control-sm" name="endDate" id="endDate" th:value="${endDate.toString()}" required>
         </div>
       </div>
       <div class="row">
